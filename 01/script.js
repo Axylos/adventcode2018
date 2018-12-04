@@ -1,23 +1,11 @@
 const { load } = require('./loader');
 
-const parseAndAddCmd = (op, val, sum) => {
-  switch(op) {
-    case '+':
-      return sum + val;
-    case '-':
-      return sum - val;
-    default:
-      throw Error('invalid op code');
-  }
-}
-
 function* cmdStream(cmds) {
   let ctr = 0;
   let idx = 0;
   let sum = 0;
   while (true) {
-    const { op, val } = cmds[idx];
-    sum = parseAndAddCmd(op, val, sum);
+    sum = sum + cmds[idx]
     idx++;
     ctr++;
     idx = idx === cmds.length ? 0 : idx;
